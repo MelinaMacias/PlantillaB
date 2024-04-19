@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backend:
+    image: melinamacias/spring:latest
+    container_name: backend
+    environment:
+      - SPRING_DATASOURCE_URL = jdbc:oracle:thin:@192.168.0.115:5678/xe
+      - SPRING_DATASOURCE_USERNAME = DESA_TELCONET
+      - SPRING_DATASOURCE_PASSWORD = 12345
+      - SPRING_JPA_SHOW-SQL = true
+      - SPRING_JPA_HIBERNATE_DDL-AUTO = create
+      - expiration =30
+      - value =VzCu/LdyFnFuj/+UnXKEgiZLoPKeAePlRb5iBDlzy1g7yR83QgWgY4xEaeJnWq/d7TBwYPcEBYG7TqYCA7LmQ==
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: melinamacias/angularproject:latest
+    container_name: frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+
